@@ -292,7 +292,7 @@ namespace TheKiwiCoder {
         }
 
         NodeView CreateNodeView(Node node) {
-            NodeView nodeView = new NodeView(node, BehaviourTreeEditorWindow.Instance.nodeXml);
+            NodeView nodeView = new NodeView(node, BehaviourTreeProjectSettings.GetOrCreateSettings().nodeXml);
             AddElement(nodeView);
             nodeView.OnNodeSelected = OnNodeSelected;
             return nodeView;

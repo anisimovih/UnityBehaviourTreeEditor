@@ -21,20 +21,11 @@ namespace TheKiwiCoder {
 
             switch (type) {
                 case 0:
-                    if (projectSettings.scriptTemplateActionNode) {
-                        return projectSettings.scriptTemplateActionNode;
-                    }
-                    return BehaviourTreeEditorWindow.Instance.scriptTemplateActionNode;
+                    return projectSettings.scriptTemplateActionNode;
                 case 1:
-                    if (projectSettings.scriptTemplateCompositeNode) {
-                        return projectSettings.scriptTemplateCompositeNode;
-                    }
-                    return BehaviourTreeEditorWindow.Instance.scriptTemplateCompositeNode;
+                    return projectSettings.scriptTemplateCompositeNode;
                 case 2:
-                    if (projectSettings.scriptTemplateDecoratorNode) {
-                        return projectSettings.scriptTemplateDecoratorNode;
-                    }
-                    return BehaviourTreeEditorWindow.Instance.scriptTemplateDecoratorNode;
+                    return projectSettings.scriptTemplateDecoratorNode;
             }
             Debug.LogError("Unhandled script template type:" + type);
             return null;

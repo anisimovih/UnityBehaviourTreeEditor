@@ -9,6 +9,15 @@ using UnityEditor.UIElements;
 namespace TheKiwiCoder {
     // Create a new type of Settings Asset.
     public class BehaviourTreeProjectSettings : ScriptableObject {
+        
+        [Tooltip("Xml for the actual behaviour tree")]
+        public VisualTreeAsset behaviourTreeXml;
+        
+        [Tooltip("Style for the actual behaviour tree")]
+        public StyleSheet behaviourTreeStyle;
+        
+        [Tooltip("Xml for behaviour tree nodes")]
+        public VisualTreeAsset nodeXml;
 
         [Tooltip("Folder where new tree assets will be created. (Must begin with 'Assets')")]
         public string newTreePath = "Assets/";

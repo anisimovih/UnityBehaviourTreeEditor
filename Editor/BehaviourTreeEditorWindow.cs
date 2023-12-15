@@ -41,12 +41,6 @@ namespace TheKiwiCoder {
         }
         public static BehaviourTreeEditorWindow Instance;
         public BehaviourTreeProjectSettings settings;
-        public VisualTreeAsset behaviourTreeXml;
-        public VisualTreeAsset nodeXml;
-        public StyleSheet behaviourTreeStyle;
-        public TextAsset scriptTemplateActionNode;
-        public TextAsset scriptTemplateCompositeNode;
-        public TextAsset scriptTemplateDecoratorNode;
 
         public BehaviourTreeView treeView;
         public InspectorView inspectorView;
@@ -95,12 +89,12 @@ namespace TheKiwiCoder {
             VisualElement root = rootVisualElement;
 
             // Import UXML
-            var visualTree = behaviourTreeXml;
+            var visualTree = settings.behaviourTreeXml;
             visualTree.CloneTree(root);
 
             // A stylesheet can be added to a VisualElement.
             // The style will be applied to the VisualElement and all of its children.
-            var styleSheet = behaviourTreeStyle;
+            var styleSheet = settings.behaviourTreeStyle;
             root.styleSheets.Add(styleSheet);
 
             // Main treeview
@@ -112,8 +106,6 @@ namespace TheKiwiCoder {
             newScriptDialog = root.Q<NewScriptDialogView>("NewScriptDialogView");
             breadcrumbs = root.Q<ToolbarBreadcrumbs>("breadcrumbs");
             versionLabel = root.Q<Label>("Version");
-
-            treeView.styleSheets.Add(behaviourTreeStyle);
 
             // Toolbar assets menu
             toolbarMenu.RegisterCallback<MouseEnterEvent>((evt) => {
