@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework.Internal;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
@@ -38,7 +39,17 @@ namespace TheKiwiCoder {
             }
         }
 
-        public NodeView(Node node, VisualTreeAsset nodeXml) : base(AssetDatabase.GetAssetPath(nodeXml)) {
+        public NodeView(Node node, VisualTreeAsset nodeXml)  : base(AssetDatabase.GetAssetPath(nodeXml)) {
+            Init(node);
+        }
+        
+        public NodeView(Node node)
+        {
+            Debug.LogWarning("Node Xml file is not selected. Using default. Please select one in Edit/Project Settings.");
+            Init(node);
+        }
+        
+        private void Init(Node node) {
             this.capabilities &= ~(Capabilities.Snappable); // Disable node snapping
             this.node = node;
             this.title = node.GetType().Name;
@@ -58,13 +69,11 @@ namespace TheKiwiCoder {
         public void SetupDataBinding() {
             SerializedBehaviourTree serializer = BehaviourTreeEditorWindow.Instance.serializer;
             var nodeProp = serializer.FindNode(serializer.Nodes, node);
-            if (nodeProp != null) {
-                var descriptionProp = nodeProp.FindPropertyRelative("description");
-                if (descriptionProp != null) {
-                    Label descriptionLabel = this.Q<Label>("description");
-                    descriptionLabel.BindProperty(descriptionProp);
-                }
-            }
+            var descriptionProp = nodeProp?.FindPropertyRelative("description");
+            if (descriptionProp == null) return;
+            
+            Label descriptionLabel = this.Q<Label>("description");
+            descriptionLabel?.BindProperty(descriptionProp);
         }
 
         private void SetupClasses() {

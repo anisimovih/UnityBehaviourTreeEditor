@@ -90,11 +90,19 @@ namespace TheKiwiCoder {
 
             // Import UXML
             var visualTree = settings.behaviourTreeXml;
+            if (visualTree == null) {
+                Debug.LogError("Behaviour Tree Xml file is not selected. Please select one in Edit/Project Settings.");
+                return;
+            }
             visualTree.CloneTree(root);
 
             // A stylesheet can be added to a VisualElement.
             // The style will be applied to the VisualElement and all of its children.
             var styleSheet = settings.behaviourTreeStyle;
+            if (styleSheet == null) {
+                Debug.LogError("Behaviour Tree Style file is not selected. Please select one in Edit/Project Settings.");
+                return;
+            }
             root.styleSheets.Add(styleSheet);
 
             // Main treeview
